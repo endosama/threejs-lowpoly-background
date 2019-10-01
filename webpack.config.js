@@ -3,7 +3,6 @@ var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
-// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = (env, args) => {
 	const mode = args.mode || "development";
@@ -47,12 +46,6 @@ module.exports = (env, args) => {
 				chunks: ['main', 'commons'],
 				chunksSortMode: 'manual',
 			}),
-			new webpack.ProvidePlugin({
-				$: 'jquery',
-				jQuery: 'jquery',
-				Modernizr: 'modernizr'
-			}),
-			// new BundleAnalyzerPlugin()
 		],
 		module: {
 			rules: [{
@@ -67,41 +60,6 @@ module.exports = (env, args) => {
 					}, {
 						loader: 'eslint-loader',
 					}]
-				},
-				{
-					test: /\.ts$/,
-					include: [__dirname],
-					exclude: /node_modules/,
-					use: ['babel-loader', 'ts-loader'],
-				},
-				{
-					test: /\.(jpg|png|svg)$/,
-					loader: 'file-loader',
-					options: {
-						outputPath: './images',
-					},
-				},
-				{
-					test: /\.(gif|mp4|webm)$/,
-					loader: 'file-loader',
-					options: {
-						outputPath: './videos',
-					},
-				},
-				{
-					test: /\.(ttf|eot|woff|woff2)$/,
-					loader: 'file-loader',
-					options: {
-						outputPath: './fonts',
-					},
-				},
-				{
-					test: /\.(scss)$/,
-					use: ['style-loader', 'css-loader', 'sass-loader']
-				},
-				{
-					test: /\.(css)$/,
-					use: ['style-loader', 'css-loader']
 				}
 			],
 		},
